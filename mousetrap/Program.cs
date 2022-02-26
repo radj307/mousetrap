@@ -11,7 +11,7 @@ namespace MouseTrap
             ApplicationConfiguration.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MouseTrap());
+            Application.Run(new MouseTrapForm());
         }
     }
 }

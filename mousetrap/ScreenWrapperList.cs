@@ -4,11 +4,15 @@ namespace MouseTrap
 {
     public class ScreenWrapperList : ICollection<ScreenWrapper>, IList<ScreenWrapper>, IEnumerable<ScreenWrapper>, IEnumerable, IReadOnlyCollection<ScreenWrapper>, IReadOnlyList<ScreenWrapper>, ICollection, IList
     {
-        private List<ScreenWrapper> _list;
+        private readonly List<ScreenWrapper> _list;
 
         public ScreenWrapperList()
         {
             _list = new();
+            foreach (Screen scr in Screen.AllScreens)
+            {
+                _list.Add(new(scr));
+            }
         }
 
         public ScreenWrapper this[int index] { get => ((IList<ScreenWrapper>)_list)[index]; set => ((IList<ScreenWrapper>)_list)[index] = value; }

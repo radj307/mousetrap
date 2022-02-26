@@ -1,6 +1,6 @@
 ﻿namespace MouseTrap
 {
-    partial class MouseTrap
+    partial class MouseTrapForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -186,6 +186,7 @@
             // 
             this.cmb_TargetScreen.BackColor = System.Drawing.Color.WhiteSmoke;
             this.cmb_TargetScreen.DataSource = this.screenBindingSource;
+            this.cmb_TargetScreen.DisplayMember = "ScreenName";
             this.cmb_TargetScreen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_TargetScreen.ForeColor = System.Drawing.SystemColors.ControlText;
             this.cmb_TargetScreen.FormattingEnabled = true;
@@ -197,6 +198,7 @@
             // screenBindingSource
             // 
             this.screenBindingSource.AllowNew = true;
+            this.screenBindingSource.DataSource = typeof(MouseTrap.ScreenWrapperList);
             // 
             // panel_TargetScreen
             // 

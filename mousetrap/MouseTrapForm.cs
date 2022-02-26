@@ -1,6 +1,6 @@
 namespace MouseTrap
 {
-    public partial class MouseTrap : Form
+    public partial class MouseTrapForm : Form
     {
         private Rectangle bounds = new();
         private Point max = new();
@@ -8,7 +8,7 @@ namespace MouseTrap
         private readonly Color colLocked = Color.FromArgb(255, 255, 8, 2), colUnlocked = Color.FromArgb(255, 15, 255, 0);
         private readonly Image locked = Properties.Resources.locked_64, unlocked = Properties.Resources.unlocked_64;
 
-        private ScreenWrapperList screens;
+        private readonly ScreenWrapperList screens;
 
         private void UpdateStateImage()
         {
@@ -42,7 +42,7 @@ namespace MouseTrap
             }
         }
 
-        public MouseTrap()
+        public MouseTrapForm()
         {
             InitializeComponent();
 
