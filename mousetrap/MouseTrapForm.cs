@@ -10,6 +10,26 @@ namespace MouseTrap
 
         private readonly ScreenWrapperList screens;
 
+        private void UpdateTargetScreen(ScreenWrapper? scr)
+        {
+            if (scr == null)
+                return;
+
+            bool enabled = LockerEnabled;
+            cb_Unlock_Click(this, EventArgs.Empty);
+
+            bounds = scr.Screen.Bounds;
+
+            max.X = bounds.X + bounds.Width;
+            max.Y = bounds.Y + bounds.Height;
+
+            Properties.Settings.Default.TargetScreen = scr.ScreenName;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+
+            if (enabled) cb_Lock_Click(this, EventArgs.Empty);
+        }
+
         private void UpdateStateImage()
         {
             if (LockerEnabled)
@@ -31,13 +51,17 @@ namespace MouseTrap
             {
                 if (value)
                 {
-                    LockTimer.Enabled = Properties.Settings.Default.LockEnabled = true;
+                    Properties.Settings.Default.LockEnabled = LockTimer.Enabled = true;
                     UpdateStateImage();
+                    Properties.Settings.Default.Save();
+                    Properties.Settings.Default.Reload();
                 }
                 else
                 {
-                    LockTimer.Enabled = Properties.Settings.Default.LockEnabled = false;
+                    Properties.Settings.Default.LockEnabled = LockTimer.Enabled = false;
                     UpdateStateImage();
+                    Properties.Settings.Default.Save();
+                    Properties.Settings.Default.Reload();
                 }
             }
         }
@@ -57,6 +81,15 @@ namespace MouseTrap
 
             screens = new ScreenWrapperList();
             screenBindingSource.DataSource = screens;
+
+            string name = Properties.Settings.Default.TargetScreen;
+            foreach (ScreenWrapper scr in cmb_TargetScreen.Items)
+            {
+                if (scr.ScreenName == name)
+                {
+                    cmb_TargetScreen.SelectedItem = scr;
+                }
+            }
         }
 
         private void csmi_Close_Click(object sender, EventArgs e) => Close();
@@ -71,6 +104,9 @@ namespace MouseTrap
             Properties.Settings.Default.Save();
             Properties.Settings.Default.Reload();
         }
+
+        private void cmb_TargetScreen_SelectedIndexChanged(object sender, EventArgs e)
+            => UpdateTargetScreen((ScreenWrapper)cmb_TargetScreen.SelectedItem);
 
         private void TrayIcon_DoubleClick(object sender, EventArgs e) => Show();
 

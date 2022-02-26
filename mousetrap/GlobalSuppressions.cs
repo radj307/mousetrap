@@ -8,3 +8,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MouseTrap.MouseTrapForm.cb_Lock_Click(System.Object,System.EventArgs)")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MouseTrap.MouseTrapForm.cb_Unlock_Click(System.Object,System.EventArgs)")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MouseTrap.MouseTrapForm.csmi_Close_Click(System.Object,System.EventArgs)")]
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MouseTrap.MouseTrapForm.cmb_TargetScreen_SelectedValueChanged(System.Object,System.EventArgs)")]
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:MouseTrap.MouseTrapForm.cmb_TargetScreen_SelectedIndexChanged(System.Object,System.EventArgs)")]

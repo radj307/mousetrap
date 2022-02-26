@@ -46,5 +46,17 @@ namespace MouseTrap.Properties {
                 this["CheckInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("DISPLAY1")]
+        public string TargetScreen {
+            get {
+                return ((string)(this["TargetScreen"]));
+            }
+            set {
+                this["TargetScreen"] = value;
+            }
+        }
     }
 }

@@ -194,6 +194,7 @@
             this.cmb_TargetScreen.Name = "cmb_TargetScreen";
             this.cmb_TargetScreen.Size = new System.Drawing.Size(229, 23);
             this.cmb_TargetScreen.TabIndex = 3;
+            this.cmb_TargetScreen.SelectedIndexChanged += new System.EventHandler(this.cmb_TargetScreen_SelectedIndexChanged);
             // 
             // screenBindingSource
             // 
@@ -223,7 +224,7 @@
             this.panel_Main.Size = new System.Drawing.Size(251, 115);
             this.panel_Main.TabIndex = 5;
             // 
-            // MouseTrap
+            // MouseTrapForm
             // 
             this.AcceptButton = this.cb_Lock;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -235,7 +236,7 @@
             this.Controls.Add(this.panel_Main);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
-            this.Name = "MouseTrap";
+            this.Name = "MouseTrapForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Mouse Trap";
