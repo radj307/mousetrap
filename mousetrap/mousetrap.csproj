@@ -9,7 +9,15 @@
     <StartupObject>MouseTrap.Program</StartupObject>
     <RootNamespace>MouseTrap</RootNamespace>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+    <Version>3.3.4.1</Version>
+    <IsPreRelease>false</IsPreRelease>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <AssemblyAttribute Include="VolumeControl.IsPreReleaseAttribute">
+      <_Parameter1>$(IsPreRelease)</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Settings.Designer.cs">
