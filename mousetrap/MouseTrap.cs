@@ -2,20 +2,26 @@ namespace MouseTrap
 {
     public partial class MouseTrap : Form
     {
-        private readonly Color colorEnabled = Color.DarkOliveGreen, colorDisabled = Color.Red;
         private Rectangle bounds = new();
         private Point max = new();
 
-        private void SetBackColor(Color bg)
+        private readonly Color colLocked = Color.FromArgb(255, 255, 8, 2), colUnlocked = Color.FromArgb(255, 15, 255, 0);
+        private readonly Image locked = Properties.Resources.locked_64, unlocked = Properties.Resources.unlocked_64;
+
+        private ScreenWrapperList screens;
+
+        private void UpdateStateImage()
         {
-            BackColor = bg;
-            //foreach (Control ctrl in Controls)
-            //{
-            //            if (ctrl is Panel)
-            //          {
-            //            ctrl.BackColor = bg;
-            //      }
-            //}
+            if (LockerEnabled)
+            {
+                BackColor = colLocked;
+                img_LockState.Image = locked;
+            }
+            else
+            {
+                BackColor = colUnlocked;
+                img_LockState.Image = unlocked;
+            }
         }
 
         public bool LockerEnabled
@@ -26,12 +32,12 @@ namespace MouseTrap
                 if (value)
                 {
                     LockTimer.Enabled = Properties.Settings.Default.LockEnabled = true;
-                    SetBackColor(colorEnabled);
+                    UpdateStateImage();
                 }
                 else
                 {
                     LockTimer.Enabled = Properties.Settings.Default.LockEnabled = false;
-                    SetBackColor(colorDisabled);
+                    UpdateStateImage();
                 }
             }
         }
@@ -47,8 +53,10 @@ namespace MouseTrap
 
             num_Interval.Value = Convert.ToDecimal(LockTimer.Interval = Properties.Settings.Default.CheckInterval);
 
-
             LockerEnabled = false;
+
+            screens = new ScreenWrapperList();
+            screenBindingSource.DataSource = screens;
         }
 
         private void csmi_Close_Click(object sender, EventArgs e) => Close();
@@ -63,6 +71,8 @@ namespace MouseTrap
             Properties.Settings.Default.Save();
             Properties.Settings.Default.Reload();
         }
+
+        private void TrayIcon_DoubleClick(object sender, EventArgs e) => Show();
 
         private void LockTimer_Tick(object sender, EventArgs e)
         {
