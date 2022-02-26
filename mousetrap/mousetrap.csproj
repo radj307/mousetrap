@@ -10,11 +10,15 @@
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
     <Version>0.1.1</Version>
     <IsPreRelease>false</IsPreRelease>
+    <ApplicationIcon>Resources\icons\mousetrap.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <AssemblyAttribute Include="VolumeControl.IsPreReleaseAttribute">
       <_Parameter1>$(IsPreRelease)</_Parameter1>
     </AssemblyAttribute>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\icons\mousetrap.ico" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
