@@ -1,4 +1,4 @@
-namespace MainForm
+namespace MouseTrap
 {
     internal static class Program
     {
@@ -11,7 +11,7 @@ namespace MainForm
             ApplicationConfiguration.Initialize();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new MouseTrap());
         }
     }
 }

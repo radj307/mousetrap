@@ -1,11 +1,10 @@
-namespace MainForm
+namespace MouseTrap
 {
-    public partial class MainForm : Form
+    public partial class MouseTrap : Form
     {
         private readonly Color colorEnabled = Color.DarkOliveGreen, colorDisabled = Color.Red;
         private Rectangle bounds = new();
         private Point max = new();
-        private uint aggressiveness = 0, lastAggression = 0;
 
         private void SetBackColor(Color bg)
         {
@@ -37,7 +36,7 @@ namespace MainForm
             }
         }
 
-        public MainForm()
+        public MouseTrap()
         {
             InitializeComponent();
 

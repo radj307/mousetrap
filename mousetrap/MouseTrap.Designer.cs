@@ -1,6 +1,6 @@
-﻿namespace MainForm
+﻿namespace MouseTrap
 {
-    partial class MainForm
+    partial class MouseTrap
     {
         /// <summary>
         ///  Required designer variable.
@@ -153,7 +153,7 @@
             0});
             this.num_Interval.ValueChanged += new System.EventHandler(this.Interval_ValueChanged);
             // 
-            // MainForm
+            // MouseTrap
             // 
             this.AcceptButton = this.cb_Lock;
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -164,7 +164,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel_buttons);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Name = "MainForm";
+            this.Name = "MouseTrap";
             this.Text = "Mouse Trap";
             this.panel_buttons.ResumeLayout(false);
             this.TrayContextMenu.ResumeLayout(false);
