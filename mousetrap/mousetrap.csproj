@@ -8,7 +8,7 @@
     <StartupObject>MouseTrap.Program</StartupObject>
     <RootNamespace>MouseTrap</RootNamespace>
     <IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <IsPreRelease>false</IsPreRelease>
   </PropertyGroup>
   <ItemGroup>
