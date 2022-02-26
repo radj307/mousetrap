@@ -90,6 +90,9 @@ namespace MouseTrap
                     cmb_TargetScreen.SelectedItem = scr;
                 }
             }
+
+            // set the window title
+            Text = $"Mouse Trap v{System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion?.Match(new("([0-9]+\\.[0-9]+\\.[0-9]+)(?:\\.*[1-9])*"))}";
         }
 
         private void csmi_Close_Click(object sender, EventArgs e) => Close();
