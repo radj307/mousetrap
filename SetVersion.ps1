@@ -5,8 +5,7 @@ $SCRIPTVERSION = "1" # The version number of this script file
 Write-Host "Running SetVersion.ps1 $SCRIPTVERSION" # LOG
 
 # .csproj locations
-$global:VC = "$(Get-Location)\VolumeControl\VolumeControl.csproj"
-$global:VCCLI = "$(Get-Location)\VolumeControlCLI\VolumeControlCLI.csproj"
+$global:mousetrap = "$(Get-Location)\mousetrap\mousetrap.csproj"
 
 if ( $args[1] )
 {
@@ -96,7 +95,6 @@ function SetVersion
     }
 }
 
-SetVersion($global:VC)
-SetVersion($global:VCCLI)
+SetVersion($global:mousetrap)
 
 "SetVersion.ps1 Finished."
