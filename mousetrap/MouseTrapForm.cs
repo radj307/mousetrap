@@ -2,69 +2,7 @@ namespace MouseTrap
 {
     public partial class MouseTrapForm : Form
     {
-        private Rectangle bounds = new();
-        private Point max = new();
-
-        private readonly Color colLocked = Color.FromArgb(255, 255, 8, 2), colUnlocked = Color.FromArgb(255, 15, 255, 0);
-        private readonly Image locked = Properties.Resources.locked_64, unlocked = Properties.Resources.unlocked_64;
-
-        private readonly ScreenWrapperList screens;
-
-        private void UpdateTargetScreen(ScreenWrapper? scr)
-        {
-            if (scr == null)
-                return;
-
-            bool enabled = LockerEnabled;
-            cb_Unlock_Click(this, EventArgs.Empty);
-
-            bounds = scr.Screen.Bounds;
-
-            max.X = bounds.X + bounds.Width;
-            max.Y = bounds.Y + bounds.Height;
-
-            Properties.Settings.Default.TargetScreen = scr.ScreenName;
-            Properties.Settings.Default.Save();
-            Properties.Settings.Default.Reload();
-
-            if (enabled) cb_Lock_Click(this, EventArgs.Empty);
-        }
-
-        private void UpdateStateImage()
-        {
-            if (LockerEnabled)
-            {
-                BackColor = colLocked;
-                img_LockState.Image = locked;
-            }
-            else
-            {
-                BackColor = colUnlocked;
-                img_LockState.Image = unlocked;
-            }
-        }
-
-        public bool LockerEnabled
-        {
-            get => Properties.Settings.Default.LockEnabled;
-            set
-            {
-                if (value)
-                {
-                    Properties.Settings.Default.LockEnabled = LockTimer.Enabled = true;
-                    UpdateStateImage();
-                    Properties.Settings.Default.Save();
-                    Properties.Settings.Default.Reload();
-                }
-                else
-                {
-                    Properties.Settings.Default.LockEnabled = LockTimer.Enabled = false;
-                    UpdateStateImage();
-                    Properties.Settings.Default.Save();
-                    Properties.Settings.Default.Reload();
-                }
-            }
-        }
+        #region Constructor
 
         public MouseTrapForm()
         {
@@ -95,6 +33,75 @@ namespace MouseTrap
             Text = $"Mouse Trap v{System.Diagnostics.FileVersionInfo.GetVersionInfo(System.Reflection.Assembly.GetExecutingAssembly().Location).FileVersion?.Match(new("([0-9]+\\.[0-9]+\\.[0-9]+)(?:\\.*[1-9])*"))}";
         }
 
+        #endregion Constructor
+
+        #region Members
+
+        private Rectangle bounds = new();
+        private Point max = new();
+        private bool locked = false;
+
+        private readonly Color colLocked = Color.FromArgb(255, 255, 8, 2), colUnlocked = Color.FromArgb(255, 15, 255, 0);
+        private readonly Image imgLocked = Properties.Resources.locked_64, imgUnlocked = Properties.Resources.unlocked_64;
+
+        private readonly ScreenWrapperList screens;
+
+        #endregion Members
+
+        #region Properties
+
+        public bool LockerEnabled
+        {
+            get => locked;
+            set
+            {
+                LockTimer.Enabled = locked = value;
+                UpdateStateImage();
+            }
+        }
+
+        #endregion Properties
+
+        #region Methods
+
+        private void UpdateTargetScreen(ScreenWrapper? scr)
+        {
+            if (scr == null)
+                return;
+
+            bool enabled = LockerEnabled;
+            cb_Unlock_Click(this, EventArgs.Empty);
+
+            bounds = scr.Screen.Bounds;
+
+            max.X = bounds.X + bounds.Width;
+            max.Y = bounds.Y + bounds.Height;
+
+            Properties.Settings.Default.TargetScreen = scr.ScreenName;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+
+            if (enabled) cb_Lock_Click(this, EventArgs.Empty);
+        }
+
+        private void UpdateStateImage()
+        {
+            if (LockerEnabled)
+            {
+                BackColor = colLocked;
+                img_LockState.Image = imgLocked;
+            }
+            else
+            {
+                BackColor = colUnlocked;
+                img_LockState.Image = imgUnlocked;
+            }
+        }
+
+        #endregion Methods
+
+        #region FormMethods
+
         private void csmi_Close_Click(object sender, EventArgs e) => Close();
 
         private void cb_Lock_Click(object sender, EventArgs e) => LockerEnabled = true;
@@ -112,6 +119,19 @@ namespace MouseTrap
             => UpdateTargetScreen((ScreenWrapper)cmb_TargetScreen.SelectedItem);
 
         private void TrayIcon_DoubleClick(object sender, EventArgs e) => Show();
+
+        private void csmi_Lock_CheckedChanged(object sender, EventArgs e)
+            => LockerEnabled = csmi_Lock.Checked;
+
+        private void csmi_BringToFront_Click(object sender, EventArgs e)
+            => BringToFront();
+
+        private void csmi_AlwaysOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.AlwaysOnTop = TopMost = csmi_AlwaysOnTop.Checked;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+        }
 
         private void LockTimer_Tick(object sender, EventArgs e)
         {
@@ -131,5 +151,7 @@ namespace MouseTrap
                 Cursor.Position = current;
             }
         }
+
+        #endregion FormMethods
     }
 }

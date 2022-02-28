@@ -35,6 +35,9 @@
             this.cb_Lock = new System.Windows.Forms.Button();
             this.TrayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.TrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.csmi_Lock = new System.Windows.Forms.ToolStripMenuItem();
+            this.csmi_AlwaysOnTop = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.csmi_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.LockTimer = new System.Windows.Forms.Timer(this.components);
             this.panel_Interval = new System.Windows.Forms.Panel();
@@ -45,6 +48,8 @@
             this.screenBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_TargetScreen = new System.Windows.Forms.Panel();
             this.panel_Main = new System.Windows.Forms.Panel();
+            this.csmi_BringToFront = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panel_buttons.SuspendLayout();
             this.TrayContextMenu.SuspendLayout();
             this.panel_Interval.SuspendLayout();
@@ -94,6 +99,7 @@
             // TrayIcon
             // 
             this.TrayIcon.ContextMenuStrip = this.TrayContextMenu;
+            this.TrayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("TrayIcon.Icon")));
             this.TrayIcon.Text = "Mouse Trap";
             this.TrayIcon.Visible = true;
             this.TrayIcon.DoubleClick += new System.EventHandler(this.TrayIcon_DoubleClick);
@@ -101,14 +107,46 @@
             // TrayContextMenu
             // 
             this.TrayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.csmi_Lock,
+            this.csmi_AlwaysOnTop,
+            this.toolStripSeparator2,
+            this.csmi_BringToFront,
+            this.toolStripSeparator1,
             this.csmi_Close});
+            this.TrayContextMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.TrayContextMenu.Name = "TrayContextMenu";
-            this.TrayContextMenu.Size = new System.Drawing.Size(104, 26);
+            this.TrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.TrayContextMenu.ShowCheckMargin = true;
+            this.TrayContextMenu.ShowImageMargin = false;
+            this.TrayContextMenu.Size = new System.Drawing.Size(181, 126);
+            // 
+            // csmi_Lock
+            // 
+            this.csmi_Lock.CheckOnClick = true;
+            this.csmi_Lock.Name = "csmi_Lock";
+            this.csmi_Lock.Size = new System.Drawing.Size(180, 22);
+            this.csmi_Lock.Text = "Lock";
+            this.csmi_Lock.CheckedChanged += new System.EventHandler(this.csmi_Lock_CheckedChanged);
+            // 
+            // csmi_AlwaysOnTop
+            // 
+            this.csmi_AlwaysOnTop.CheckOnClick = true;
+            this.csmi_AlwaysOnTop.Name = "csmi_AlwaysOnTop";
+            this.csmi_AlwaysOnTop.Size = new System.Drawing.Size(180, 22);
+            this.csmi_AlwaysOnTop.Text = "Always on Top";
+            this.csmi_AlwaysOnTop.ToolTipText = "Check to force the window to always show on top of other windows, except for full" +
+    "screen ones.";
+            this.csmi_AlwaysOnTop.CheckedChanged += new System.EventHandler(this.csmi_AlwaysOnTop_CheckedChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // csmi_Close
             // 
             this.csmi_Close.Name = "csmi_Close";
-            this.csmi_Close.Size = new System.Drawing.Size(103, 22);
+            this.csmi_Close.Size = new System.Drawing.Size(180, 22);
             this.csmi_Close.Text = "Close";
             this.csmi_Close.Click += new System.EventHandler(this.csmi_Close_Click);
             // 
@@ -213,7 +251,7 @@
             // 
             // panel_Main
             // 
-            this.panel_Main.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
+            this.panel_Main.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.panel_Main.Controls.Add(this.img_LockState);
             this.panel_Main.Controls.Add(this.panel_buttons);
             this.panel_Main.Controls.Add(this.panel_TargetScreen);
@@ -225,6 +263,18 @@
             this.panel_Main.Size = new System.Drawing.Size(251, 115);
             this.panel_Main.TabIndex = 5;
             // 
+            // csmi_BringToFront
+            // 
+            this.csmi_BringToFront.Name = "csmi_BringToFront";
+            this.csmi_BringToFront.Size = new System.Drawing.Size(180, 22);
+            this.csmi_BringToFront.Text = "Bring to Front";
+            this.csmi_BringToFront.Click += new System.EventHandler(this.csmi_BringToFront_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            // 
             // MouseTrapForm
             // 
             this.AcceptButton = this.cb_Lock;
@@ -235,14 +285,13 @@
             this.CancelButton = this.cb_Unlock;
             this.ClientSize = new System.Drawing.Size(253, 117);
             this.Controls.Add(this.panel_Main);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MouseTrapForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Mouse Trap";
-            this.TopMost = true;
             this.panel_buttons.ResumeLayout(false);
             this.TrayContextMenu.ResumeLayout(false);
             this.panel_Interval.ResumeLayout(false);
@@ -273,5 +322,10 @@
         private Panel panel_TargetScreen;
         private BindingSource screenBindingSource;
         private Panel panel_Main;
+        private ToolStripMenuItem csmi_Lock;
+        private ToolStripMenuItem csmi_AlwaysOnTop;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripMenuItem csmi_BringToFront;
     }
 }
