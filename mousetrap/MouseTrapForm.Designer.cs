@@ -37,6 +37,8 @@
             this.TrayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.csmi_Lock = new System.Windows.Forms.ToolStripMenuItem();
             this.csmi_AlwaysOnTop = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.csmi_BringToFront = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.csmi_Close = new System.Windows.Forms.ToolStripMenuItem();
             this.LockTimer = new System.Windows.Forms.Timer(this.components);
@@ -48,8 +50,6 @@
             this.screenBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel_TargetScreen = new System.Windows.Forms.Panel();
             this.panel_Main = new System.Windows.Forms.Panel();
-            this.csmi_BringToFront = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.panel_buttons.SuspendLayout();
             this.TrayContextMenu.SuspendLayout();
             this.panel_Interval.SuspendLayout();
@@ -118,13 +118,13 @@
             this.TrayContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.TrayContextMenu.ShowCheckMargin = true;
             this.TrayContextMenu.ShowImageMargin = false;
-            this.TrayContextMenu.Size = new System.Drawing.Size(181, 126);
+            this.TrayContextMenu.Size = new System.Drawing.Size(151, 104);
             // 
             // csmi_Lock
             // 
             this.csmi_Lock.CheckOnClick = true;
             this.csmi_Lock.Name = "csmi_Lock";
-            this.csmi_Lock.Size = new System.Drawing.Size(180, 22);
+            this.csmi_Lock.Size = new System.Drawing.Size(150, 22);
             this.csmi_Lock.Text = "Lock";
             this.csmi_Lock.CheckedChanged += new System.EventHandler(this.csmi_Lock_CheckedChanged);
             // 
@@ -132,21 +132,33 @@
             // 
             this.csmi_AlwaysOnTop.CheckOnClick = true;
             this.csmi_AlwaysOnTop.Name = "csmi_AlwaysOnTop";
-            this.csmi_AlwaysOnTop.Size = new System.Drawing.Size(180, 22);
+            this.csmi_AlwaysOnTop.Size = new System.Drawing.Size(150, 22);
             this.csmi_AlwaysOnTop.Text = "Always on Top";
             this.csmi_AlwaysOnTop.ToolTipText = "Check to force the window to always show on top of other windows, except for full" +
     "screen ones.";
             this.csmi_AlwaysOnTop.CheckedChanged += new System.EventHandler(this.csmi_AlwaysOnTop_CheckedChanged);
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(147, 6);
+            // 
+            // csmi_BringToFront
+            // 
+            this.csmi_BringToFront.Name = "csmi_BringToFront";
+            this.csmi_BringToFront.Size = new System.Drawing.Size(150, 22);
+            this.csmi_BringToFront.Text = "Bring to Front";
+            this.csmi_BringToFront.Click += new System.EventHandler(this.csmi_BringToFront_Click);
+            // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(147, 6);
             // 
             // csmi_Close
             // 
             this.csmi_Close.Name = "csmi_Close";
-            this.csmi_Close.Size = new System.Drawing.Size(180, 22);
+            this.csmi_Close.Size = new System.Drawing.Size(150, 22);
             this.csmi_Close.Text = "Close";
             this.csmi_Close.Click += new System.EventHandler(this.csmi_Close_Click);
             // 
@@ -238,7 +250,6 @@
             // screenBindingSource
             // 
             this.screenBindingSource.AllowNew = true;
-            this.screenBindingSource.DataSource = typeof(MouseTrap.ScreenWrapperList);
             // 
             // panel_TargetScreen
             // 
@@ -263,18 +274,6 @@
             this.panel_Main.Size = new System.Drawing.Size(251, 115);
             this.panel_Main.TabIndex = 5;
             // 
-            // csmi_BringToFront
-            // 
-            this.csmi_BringToFront.Name = "csmi_BringToFront";
-            this.csmi_BringToFront.Size = new System.Drawing.Size(180, 22);
-            this.csmi_BringToFront.Text = "Bring to Front";
-            this.csmi_BringToFront.Click += new System.EventHandler(this.csmi_BringToFront_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
-            // 
             // MouseTrapForm
             // 
             this.AcceptButton = this.cb_Lock;
@@ -285,7 +284,7 @@
             this.CancelButton = this.cb_Unlock;
             this.ClientSize = new System.Drawing.Size(253, 117);
             this.Controls.Add(this.panel_Main);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "MouseTrapForm";
